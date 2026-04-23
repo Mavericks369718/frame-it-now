@@ -71,7 +71,18 @@ function LoginScreen() {
           </p>
         </div>
 
-        <div className="mt-12">
+        <div className="mt-8 mb-8 rounded-2xl overflow-hidden bg-muted/30">
+          <video
+            src="https://cdnl.iconscout.com/lottie/premium/preview-watermark/wedding-photoshoot-animation-gif-download-3233763.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-auto object-cover"
+          />
+        </div>
+
+        <div>
           {step === "phone" ? (
             <div className="space-y-4 fade-up">
               <label className="block text-xs tracking-wider uppercase text-muted-foreground">
