@@ -9,38 +9,215 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as PhotographersRouteImport } from './routes/photographers'
+import { Route as PaymentRouteImport } from './routes/payment'
+import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as HomeRouteImport } from './routes/home'
+import { Route as ConfirmationRouteImport } from './routes/confirmation'
+import { Route as BookingsRouteImport } from './routes/bookings'
+import { Route as BookingRouteImport } from './routes/booking'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PhotographerIdRouteImport } from './routes/photographer.$id'
 
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PhotographersRoute = PhotographersRouteImport.update({
+  id: '/photographers',
+  path: '/photographers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PaymentRoute = PaymentRouteImport.update({
+  id: '/payment',
+  path: '/payment',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingRoute = OnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HomeRoute = HomeRouteImport.update({
+  id: '/home',
+  path: '/home',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConfirmationRoute = ConfirmationRouteImport.update({
+  id: '/confirmation',
+  path: '/confirmation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookingsRoute = BookingsRouteImport.update({
+  id: '/bookings',
+  path: '/bookings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookingRoute = BookingRouteImport.update({
+  id: '/booking',
+  path: '/booking',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PhotographerIdRoute = PhotographerIdRouteImport.update({
+  id: '/photographer/$id',
+  path: '/photographer/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/booking': typeof BookingRoute
+  '/bookings': typeof BookingsRoute
+  '/confirmation': typeof ConfirmationRoute
+  '/home': typeof HomeRoute
+  '/onboarding': typeof OnboardingRoute
+  '/payment': typeof PaymentRoute
+  '/photographers': typeof PhotographersRoute
+  '/profile': typeof ProfileRoute
+  '/photographer/$id': typeof PhotographerIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/booking': typeof BookingRoute
+  '/bookings': typeof BookingsRoute
+  '/confirmation': typeof ConfirmationRoute
+  '/home': typeof HomeRoute
+  '/onboarding': typeof OnboardingRoute
+  '/payment': typeof PaymentRoute
+  '/photographers': typeof PhotographersRoute
+  '/profile': typeof ProfileRoute
+  '/photographer/$id': typeof PhotographerIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/booking': typeof BookingRoute
+  '/bookings': typeof BookingsRoute
+  '/confirmation': typeof ConfirmationRoute
+  '/home': typeof HomeRoute
+  '/onboarding': typeof OnboardingRoute
+  '/payment': typeof PaymentRoute
+  '/photographers': typeof PhotographersRoute
+  '/profile': typeof ProfileRoute
+  '/photographer/$id': typeof PhotographerIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/booking'
+    | '/bookings'
+    | '/confirmation'
+    | '/home'
+    | '/onboarding'
+    | '/payment'
+    | '/photographers'
+    | '/profile'
+    | '/photographer/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/booking'
+    | '/bookings'
+    | '/confirmation'
+    | '/home'
+    | '/onboarding'
+    | '/payment'
+    | '/photographers'
+    | '/profile'
+    | '/photographer/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/booking'
+    | '/bookings'
+    | '/confirmation'
+    | '/home'
+    | '/onboarding'
+    | '/payment'
+    | '/photographers'
+    | '/profile'
+    | '/photographer/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BookingRoute: typeof BookingRoute
+  BookingsRoute: typeof BookingsRoute
+  ConfirmationRoute: typeof ConfirmationRoute
+  HomeRoute: typeof HomeRoute
+  OnboardingRoute: typeof OnboardingRoute
+  PaymentRoute: typeof PaymentRoute
+  PhotographersRoute: typeof PhotographersRoute
+  ProfileRoute: typeof ProfileRoute
+  PhotographerIdRoute: typeof PhotographerIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/photographers': {
+      id: '/photographers'
+      path: '/photographers'
+      fullPath: '/photographers'
+      preLoaderRoute: typeof PhotographersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/payment': {
+      id: '/payment'
+      path: '/payment'
+      fullPath: '/payment'
+      preLoaderRoute: typeof PaymentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding': {
+      id: '/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof OnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/home': {
+      id: '/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof HomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/confirmation': {
+      id: '/confirmation'
+      path: '/confirmation'
+      fullPath: '/confirmation'
+      preLoaderRoute: typeof ConfirmationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bookings': {
+      id: '/bookings'
+      path: '/bookings'
+      fullPath: '/bookings'
+      preLoaderRoute: typeof BookingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/booking': {
+      id: '/booking'
+      path: '/booking'
+      fullPath: '/booking'
+      preLoaderRoute: typeof BookingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +225,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/photographer/$id': {
+      id: '/photographer/$id'
+      path: '/photographer/$id'
+      fullPath: '/photographer/$id'
+      preLoaderRoute: typeof PhotographerIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BookingRoute: BookingRoute,
+  BookingsRoute: BookingsRoute,
+  ConfirmationRoute: ConfirmationRoute,
+  HomeRoute: HomeRoute,
+  OnboardingRoute: OnboardingRoute,
+  PaymentRoute: PaymentRoute,
+  PhotographersRoute: PhotographersRoute,
+  ProfileRoute: ProfileRoute,
+  PhotographerIdRoute: PhotographerIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
