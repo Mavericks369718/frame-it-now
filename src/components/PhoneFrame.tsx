@@ -6,8 +6,8 @@ import type { ReactNode } from "react";
  */
 export function PhoneFrame({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-screen w-full bg-surface flex items-center justify-center md:p-8">
-      <div className="phone-frame relative w-full md:w-[420px] md:h-[860px] md:rounded-[44px] md:overflow-hidden flex flex-col min-h-screen md:min-h-0">
+    <div className="min-h-screen w-full bg-[var(--color-surface)] flex items-center justify-center md:p-8">
+      <div className="phone-frame relative w-full md:w-[420px] md:h-[880px] md:rounded-[48px] md:overflow-hidden flex flex-col min-h-screen md:min-h-0">
         {children}
       </div>
     </div>

@@ -3,7 +3,7 @@ import { useSyncExternalStore, useEffect, useState } from "react";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { PrimaryButton } from "@/components/PrimaryButton";
 import { booking, formatINR, getPhotographer } from "@/lib/store";
-import { Check } from "lucide-react";
+import { Check, MessageCircle } from "lucide-react";
 
 export const Route = createFileRoute("/confirmation")({
   head: () => ({ meta: [{ title: "Booking confirmed — FrameIt" }] }),
@@ -40,46 +40,59 @@ function Confirmation() {
 
   return (
     <PhoneFrame>
-      <div className="flex-1 flex flex-col px-7 pt-20 pb-8">
+      <div className="flex-1 flex flex-col px-6 pt-20 pb-8">
         <div className="flex-1 flex flex-col items-center text-center">
-          <div
-            className={`relative h-20 w-20 rounded-full bg-foreground flex items-center justify-center transition-all duration-700 ${
-              show ? "scale-100 opacity-100" : "scale-50 opacity-0"
-            }`}
-          >
-            <Check className="h-9 w-9 text-background" strokeWidth={2} />
+          {/* Animated check */}
+          <div className="relative">
+            <div
+              className={`absolute inset-0 rounded-full bg-foreground/10 transition-all duration-1000 ${
+                show ? "scale-[2.5] opacity-0" : "scale-100 opacity-100"
+              }`}
+            />
+            <div
+              className={`relative h-24 w-24 rounded-full bg-foreground flex items-center justify-center transition-all duration-700 ${
+                show ? "scale-100 opacity-100" : "scale-50 opacity-0"
+              }`}
+            >
+              <Check className="h-10 w-10 text-background" strokeWidth={2.5} />
+            </div>
           </div>
 
-          <h1 className="font-display text-[34px] leading-tight mt-8">
-            Booking <em className="italic font-light">confirmed.</em>
+          <h1 className="font-display text-[36px] font-semibold tracking-[-0.04em] leading-[1] mt-8">
+            You're booked.
           </h1>
-          <p className="text-sm text-muted-foreground mt-3 max-w-[20rem]">
-            We've sent the details to your phone. {photographer.name.split(" ")[0]} will reach out before the shoot.
+          <p className="text-[14px] text-muted-foreground mt-3 max-w-[20rem] leading-relaxed">
+            We've sent the details to your phone.
+            <br />
+            {photographer.name.split(" ")[0]} will reach out before your shoot.
           </p>
 
-          <div className="mt-8 px-5 py-2.5 rounded-full bg-accent">
-            <span className="text-[11px] uppercase tracking-[0.25em] text-muted-foreground">
-              Ref ·{" "}
+          <div className="mt-7 flex items-center gap-2 px-4 py-2 rounded-full bg-secondary">
+            <span className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground font-medium">
+              Ref
             </span>
-            <span className="text-xs font-medium tracking-wider text-foreground">
+            <span className="text-[12px] font-semibold tracking-wider text-foreground">
               {state.reference}
             </span>
           </div>
 
           {/* Details */}
-          <div className="w-full mt-10 p-5 rounded-2xl bg-background border border-border text-left">
+          <div className="w-full mt-9 p-5 rounded-3xl bg-secondary text-left">
             <div className="flex gap-4 items-center">
               <img
                 src={photographer.image}
                 alt={photographer.name}
-                className="h-14 w-14 rounded-full object-cover"
+                className="h-14 w-14 rounded-2xl object-cover"
               />
-              <div>
-                <div className="font-display text-base">{photographer.name}</div>
-                <div className="text-xs text-muted-foreground">
+              <div className="flex-1 min-w-0">
+                <div className="font-display text-[16px] font-semibold tracking-tight">{photographer.name}</div>
+                <div className="text-[12px] text-muted-foreground">
                   {photographer.category}
                 </div>
               </div>
+              <button className="press h-10 w-10 rounded-full bg-foreground text-background flex items-center justify-center shrink-0">
+                <MessageCircle className="h-4 w-4" strokeWidth={2} />
+              </button>
             </div>
             <div className="mt-5 pt-5 border-t border-border grid grid-cols-2 gap-y-4 gap-x-3">
               <Detail label="Date" value={state.date ?? ""} />
@@ -88,23 +101,23 @@ function Confirmation() {
               <Detail label="Amount" value={formatINR(state.packagePrice ?? 0)} />
             </div>
             <div className="mt-5 pt-5 border-t border-border flex items-center justify-between">
-              <span className="text-[11px] uppercase tracking-wider text-muted-foreground">
+              <span className="text-[11px] uppercase tracking-wider text-muted-foreground font-medium">
                 Payment
               </span>
               <span
-                className={`text-xs px-3 py-1 rounded-full ${
+                className={`text-[11px] font-medium px-3 py-1 rounded-full ${
                   state.paymentMethod === "online"
                     ? "bg-foreground text-background"
-                    : "bg-accent text-foreground"
+                    : "bg-background border border-border text-foreground"
                 }`}
               >
-                {state.paymentMethod === "online" ? "Paid" : "Pay on day"}
+                {state.paymentMethod === "online" ? "Paid" : "Pay on shoot day"}
               </span>
             </div>
           </div>
         </div>
 
-        <div className="space-y-2 mt-8">
+        <div className="space-y-2.5 mt-8">
           <PrimaryButton onClick={goHome}>Done</PrimaryButton>
         </div>
       </div>
@@ -115,10 +128,10 @@ function Confirmation() {
 function Detail({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
+      <div className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium">
         {label}
       </div>
-      <div className="text-sm text-foreground mt-1">{value}</div>
+      <div className="text-[14px] text-foreground mt-1 font-medium">{value}</div>
     </div>
   );
 }

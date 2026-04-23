@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { PhoneFrame } from "@/components/PhoneFrame";
 import { PrimaryButton } from "@/components/PrimaryButton";
+import { ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -55,102 +56,110 @@ function LoginScreen() {
 
   return (
     <PhoneFrame>
-      <div className="flex flex-col flex-1 px-7 pt-16 pb-10 fade-up">
-        <div className="mb-auto">
-          <div className="text-[11px] tracking-[0.3em] text-muted-foreground uppercase mb-3">
-            FrameIt
-          </div>
-          <h1 className="font-display text-[42px] leading-[1.05] text-foreground">
-            Book a<br />
-            <em className="italic font-light">photographer</em>
-            <br />
-            in two minutes.
-          </h1>
-          <p className="text-sm text-muted-foreground mt-4 max-w-[18rem]">
-            Curated talent. Transparent pricing. No back-and-forth.
-          </p>
-        </div>
-
-        <div className="mt-8 mb-8 rounded-2xl overflow-hidden bg-muted/30">
-          <video
-            src="https://cdnl.iconscout.com/lottie/premium/preview-watermark/wedding-photoshoot-animation-gif-download-3233763.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-auto object-cover"
+      <div className="flex flex-col flex-1 relative">
+        {/* Hero image */}
+        <div className="relative h-[44%] min-h-[300px] bg-foreground overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1551737823-dfd146e0aa22?auto=format&fit=crop&w=900&q=80"
+            alt="Photographer at work"
+            className="absolute inset-0 w-full h-full object-cover opacity-90"
           />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-background" />
+
+          <div className="relative z-10 px-7 pt-14 fade-up">
+            <div className="flex items-center gap-2">
+              <div className="h-2 w-2 rounded-full bg-white" />
+              <div className="text-[10px] tracking-[0.35em] text-white/90 uppercase font-medium">
+                FrameIt
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div>
-          {step === "phone" ? (
-            <div className="space-y-4 fade-up">
-              <label className="block text-xs tracking-wider uppercase text-muted-foreground">
-                Mobile number
-              </label>
-              <div className="flex items-center border-b border-border pb-3">
-                <span className="text-foreground text-lg mr-3">+91</span>
-                <input
-                  inputMode="numeric"
-                  maxLength={10}
-                  value={phone}
-                  onChange={(e) =>
-                    setPhone(e.target.value.replace(/\D/g, ""))
-                  }
-                  placeholder="98765 43210"
-                  className="flex-1 bg-transparent text-lg outline-none placeholder:text-muted-foreground/50"
-                />
-              </div>
-              {error && (
-                <p className="text-xs text-destructive">{error}</p>
-              )}
-              <PrimaryButton onClick={sendOtp} className="mt-6">
-                Send OTP
-              </PrimaryButton>
-            </div>
-          ) : (
-            <div className="space-y-5 fade-up">
-              <div>
-                <label className="block text-xs tracking-wider uppercase text-muted-foreground mb-1">
-                  Enter code
-                </label>
-                <p className="text-sm text-foreground">
-                  Sent to +91 {phone}{" "}
-                  <button
-                    onClick={() => setStep("phone")}
-                    className="text-muted-foreground underline underline-offset-4 ml-1"
-                  >
-                    edit
-                  </button>
+        {/* Sheet */}
+        <div className="flex-1 flex flex-col px-7 pt-8 pb-10 -mt-10 bg-background rounded-t-[36px] relative z-10 slide-up">
+          <h1 className="font-display text-[40px] leading-[0.98] text-foreground tracking-[-0.04em] font-semibold">
+            Move at the
+            <br />
+            speed of light.
+          </h1>
+          <p className="text-[15px] text-muted-foreground mt-3 max-w-[20rem] leading-relaxed">
+            Book a curated photographer in under two minutes. No back-and-forth.
+          </p>
+
+          <div className="mt-auto pt-10">
+            {step === "phone" ? (
+              <div className="space-y-5 fade-up">
+                <div className="flex items-stretch gap-2">
+                  <div className="flex items-center px-4 h-[58px] rounded-full bg-secondary text-foreground text-[15px] font-medium">
+                    +91
+                  </div>
+                  <div className="flex-1 flex items-center px-5 h-[58px] rounded-full bg-secondary focus-within:ring-2 focus-within:ring-foreground transition-all">
+                    <input
+                      inputMode="numeric"
+                      maxLength={10}
+                      value={phone}
+                      onChange={(e) =>
+                        setPhone(e.target.value.replace(/\D/g, ""))
+                      }
+                      placeholder="Mobile number"
+                      className="flex-1 bg-transparent text-[15px] outline-none placeholder:text-muted-foreground"
+                    />
+                  </div>
+                </div>
+                {error && (
+                  <p className="text-xs text-destructive px-2">{error}</p>
+                )}
+                <PrimaryButton onClick={sendOtp}>
+                  Continue
+                  <ArrowRight className="h-4 w-4 ml-2" strokeWidth={2.2} />
+                </PrimaryButton>
+                <p className="text-[11px] text-muted-foreground text-center leading-relaxed">
+                  By continuing you agree to our Terms & Privacy Policy.
                 </p>
               </div>
-              <div className="flex gap-2 justify-between">
-                {otp.map((d, i) => (
-                  <input
-                    key={i}
-                    id={`otp-${i}`}
-                    inputMode="numeric"
-                    maxLength={1}
-                    value={d}
-                    onChange={(e) => handleOtpChange(i, e.target.value)}
-                    className="w-12 h-14 rounded-xl border border-border bg-background text-center text-xl font-medium outline-none focus:border-foreground"
-                  />
-                ))}
+            ) : (
+              <div className="space-y-5 fade-up">
+                <div>
+                  <p className="text-sm text-foreground">
+                    Code sent to{" "}
+                    <span className="font-medium">+91 {phone}</span>
+                    <button
+                      onClick={() => setStep("phone")}
+                      className="text-muted-foreground underline underline-offset-4 ml-2 text-xs"
+                    >
+                      change
+                    </button>
+                  </p>
+                </div>
+                <div className="flex gap-2 justify-between">
+                  {otp.map((d, i) => (
+                    <input
+                      key={i}
+                      id={`otp-${i}`}
+                      inputMode="numeric"
+                      maxLength={1}
+                      value={d}
+                      onChange={(e) => handleOtpChange(i, e.target.value)}
+                      className="w-12 h-14 rounded-2xl bg-secondary text-center text-xl font-semibold outline-none focus:ring-2 focus:ring-foreground transition-all"
+                    />
+                  ))}
+                </div>
+                {error && (
+                  <p className="text-xs text-destructive">{error}</p>
+                )}
+                <button
+                  onClick={() => setOtp(["", "", "", "", "", ""])}
+                  className="text-xs text-muted-foreground underline underline-offset-4"
+                >
+                  Resend code
+                </button>
+                <PrimaryButton onClick={verify}>
+                  Verify & continue
+                </PrimaryButton>
               </div>
-              {error && (
-                <p className="text-xs text-destructive">{error}</p>
-              )}
-              <button
-                onClick={() => setOtp(["", "", "", "", "", ""])}
-                className="text-xs text-muted-foreground underline underline-offset-4"
-              >
-                Resend code
-              </button>
-              <PrimaryButton onClick={verify} className="mt-2">
-                Verify & continue
-              </PrimaryButton>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </PhoneFrame>

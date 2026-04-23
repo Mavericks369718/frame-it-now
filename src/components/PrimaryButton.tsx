@@ -13,10 +13,10 @@ export function PrimaryButton({
   ...rest
 }: Props) {
   const base =
-    "press inline-flex items-center justify-center w-full h-14 rounded-2xl text-[15px] font-medium tracking-wide disabled:opacity-40 disabled:pointer-events-none transition-colors";
+    "press inline-flex items-center justify-center w-full h-[58px] rounded-full text-[15px] font-medium tracking-tight disabled:opacity-30 disabled:pointer-events-none transition-colors";
   const styles =
     variant === "primary"
-      ? "bg-primary text-primary-foreground hover:bg-primary/90"
+      ? "bg-foreground text-background hover:bg-[var(--color-ink)]"
       : variant === "outline"
         ? "border border-border bg-background text-foreground hover:bg-accent"
         : "text-foreground hover:bg-accent";
